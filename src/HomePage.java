@@ -1,20 +1,32 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 public class HomePage {
-//    public HomePage() {
-//        JFrame frame = new JFrame("HomePage");
-//        frame.setContentPane(panel1);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.pack();
-//        frame.setVisible(true);
-//    }
-
-    public static void main(String[] args) {
+    public HomePage() {
         JFrame frame = new JFrame("HomePage");
-        frame.setContentPane(new HomePage().panel1);
+        frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        pictureChooseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                choosePicture();
+            }
+        });
+    }
+    private File choosePicture(){
+        File file = null;
+        JFileChooser fileChooser = new JFileChooser("C:\\Users\\Administrator\\Pictures");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("image(*.jpg, *.png, *.gif)", "jpg", "png", "gif"));
+        int r = fileChooser.showOpenDialog(fileChooser);
+        if(r == JFileChooser.APPROVE_OPTION){
+            file = fileChooser.getSelectedFile();
+        }
+        return file;
     }
 
     private JTabbedPane tabbedPane1;
@@ -29,9 +41,6 @@ public class HomePage {
     private JRadioButton pictureRadioButton;
     private JButton pictureChooseButton;
     private JLabel order;
-    private JLabel viewLable;
+    private JLabel view;
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }
